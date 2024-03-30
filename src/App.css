@@ -1,5 +1,15 @@
 .App {
   text-align: center;
+  background-image: radial-gradient(white,indigo);
+  background-size: cover;
+  height: 100vh;
+  align-items: center;
+  
+}
+.container{
+  text-align: center;
+  align-items: center;
+  
 }
 
 .App-logo {

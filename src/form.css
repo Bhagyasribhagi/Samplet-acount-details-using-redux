@@ -1,0 +1,17 @@
+.form-container{
+    font-weight: bold;
+    font-size: 30px;
+}
+.head{
+    padding: 50px;
+    font-size: 35px;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.details{
+    padding: 20px;
+}
+.form-control{
+    color: rgb(214, 6, 6);
+    font-weight: bold;
+}
