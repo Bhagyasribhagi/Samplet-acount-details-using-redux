@@ -1,12 +1,14 @@
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import './form.css'
+import {deposit, mobileUpdate,nameUpdate,withdraw,reset} from './action.js'
 function Form() {
-  let dispatch = useDispatch();
+  let dispatch = useDispatch(); //using useDispatch hook we can control the state
   const [amount, setAmount] = useState("");
   const [fullName,setFullname]=useState("");
   const [mobile,setMobile]=useState("");
-
+  const [transactionId,updatetransactionId]=useState(0);
+ 
   return (
     <>
       <div className="form-container">
@@ -27,21 +29,30 @@ function Form() {
           <button
             className="btn btn-primary col-2 m-1"
             onClick={() => {
-              dispatch({ type: "deposit", payload: amount });
+              dispatch(deposit(amount));//here we are calling dispatch in static way
+              updatetransactionId(transactionId+1)
+              dispatch({type:"ADD_TRANSACTION",payload:{
+                id:transactionId,
+                amount:amount,date:new Date(),type:"credit"
+              }})
               setAmount("");
             }}
           >
-            Deposite
+            Deposit
           </button>
 
           <button
             className="btn btn-warning col-2 m-1"
             onClick={() => {
-              dispatch({ type: "withdraw", payload: amount });
+              dispatch(withdraw(amount));
+              updatetransactionId(transactionId+1)
+              dispatch({type:"ADD_TRANSACTION",payload:{
+                id:transactionId,amount:amount,date:new Date(),type:"debit"
+              }})
               setAmount("");
             }}
           >
-            Withdrow
+            Withdraw
           </button>
         </div>
 
@@ -62,7 +73,7 @@ function Form() {
           <button
             className="btn btn-primary col-2 m-1"
             onClick={() => {
-              dispatch({ type: "nameUpdate", payload: fullName });
+              dispatch(nameUpdate(fullName));
               setFullname("");
             }}
           >
@@ -90,22 +101,17 @@ function Form() {
           <button
             className="btn btn-primary col-2"
             onClick={() => {
-              dispatch({ type: "mobileUpdate", payload: mobile });
+              dispatch(mobileUpdate(mobile));
               setMobile("");
             }}
           >
             Update
           </button>
-          
-
-         
-
-          
         </div>
         <button
             className="btn btn-danger col-2 mt-5"
             onClick={() => {
-              dispatch({ type: "reset" });
+              dispatch(reset());
              
             }}
           >
